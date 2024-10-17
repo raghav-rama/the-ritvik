@@ -1,0 +1,72 @@
+$primary-color-dark: #a3ff00;
+$secondary-color-dark: #000;
+$dark-bg: #000;
+$dark-card-bg: rgb(41, 41, 41);
+$dark-card-shadow: rgba(163, 255, 0, .2) 0px 50px 100px -20px, rgba(163, 255, 0, .3) 0px 30px 60px -30px, rgba(163, 255, 0, .5) 0px -2px 6px 0px inset;
+$dark-button-bg-gradient-linear: linear-gradient(90deg, rgba(163, 255, 0, 1) 0%, rgba(0, 255, 154, 1) 100%);
+$dark-button-bg-gradient-radial: radial-gradient(circle, rgba(163, 255, 0, 1) 0%, rgba(0, 255, 154, 1) 100%);
+$dark-button-disabled-bg: rgb(102, 102, 102);
+$dark-text: #a3ff00;
+$dark-text-secondary: #000;
+$dark-text-button: #000;
+$link-color: #66b0ff;
+$dark-input-border-color: #ccc;
+$dark-input-label-color: #fff;
+$dark-input-text-color: #fff;
+
+$primary-color-light: #000;
+$secondary-color-light: #a3ff00;
+$light-bg: #fff;
+$light-card-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+$light-card-bg: rgb(230, 230, 230);
+$light-button-bg-gradient-linear: linear-gradient(90deg, rgba(163, 255, 0, 1) 0%, rgba(0, 255, 154, 1) 100%);
+$light-button-bg-gradient-radial: radial-gradient(circle, rgba(163, 255, 0, 1) 0%, rgba(0, 255, 154, 1) 100%);
+$light-button-disabled-bg: rgb(161, 161, 161);
+$light-text: #000;
+$light-text-secondary: #a3ff00;
+$light-text-button: #000;
+$link-color-light: #0056b3;
+$light-input-border-color: #ccc;
+$light-input-label-color: #757575;
+$light-input-text-color: #000;
+$error-color: #d32f2f;
+
+$themes: (
+  light: (
+    primary-color: $primary-color-light,
+    secondary-color: $secondary-color-light,
+    background: $light-bg,
+    text: $light-text,
+    button-bg: $light-button-bg-gradient-linear,
+    button-disabled-bg: $light-button-disabled-bg,
+    card-bg: $light-card-bg,
+    card-shadow: $light-card-shadow,
+    button-text: $light-text-button,
+    link-color: $link-color-light,
+    input-border-color: $light-input-border-color,
+    input-label-color: $light-input-label-color,
+    input-text-color: $light-input-text-color,
+  ),
+  dark: (
+    primary-color: $primary-color-dark,
+    secondary-color: $secondary-color-dark,
+    background: $dark-bg,
+    text: $dark-text,
+    button-bg: $dark-button-bg-gradient-linear,
+    button-disabled-bg: $dark-button-disabled-bg,
+    card-bg: $dark-card-bg,
+    card-shadow: $dark-card-shadow,
+    button-text: $dark-text-button,
+    link-color: $link-color,
+    input-border-color: $dark-input-border-color,
+    input-label-color: $dark-input-label-color,
+    input-text-color: $dark-input-text-color,
+  ),
+);
+
+// Add these variables at the appropriate place in your file
+$font-family-base: 'Space Grotesk', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+// You can add more typography-related variables here

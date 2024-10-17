@@ -1,0 +1,67 @@
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+@import '../../styles/components/card';
+@import '../../styles/components/button';
+@import '../../styles/components/input';
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  @include card(400px, auto);
+  @include flex-center(column, 20px);
+  position: relative;
+  padding: 30px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+
+  h1 {
+    @include typography(24px, 600);
+    margin-bottom: 20px;
+  }
+
+  p {
+    @include typography(16px, 600);
+  }
+
+  button {
+    @include button(150px, 50px, 10px);
+    font-size: 1.2rem;
+    &.close-button {
+      @include flex-center(column, 20px);
+      @include button(25px, 25px, 10px);
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      @include themed() {
+        color: t('text-color');
+        background-color: t('button-bg');
+      }
+    }
+
+    &.confirm-button {
+      @include button(120px, 50px, 10px);
+      font-size: 1rem;
+      border: 1px solid black;
+    }
+  }
+
+  .input-container {
+    @include material-input();
+  }
+}

@@ -1,0 +1,55 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+@mixin material-input {
+  position: relative;
+  margin-bottom: 1rem;
+  
+
+  input {
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+    border: none;
+    @include themed() {
+      border-bottom: 1px solid t('input-border-color');
+      color: t('input-text-color');
+    }
+    background-color: transparent;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      @include themed() {
+        border-bottom-color: t('primary-color');
+      }
+    }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      transform: translateY(-1.5rem) scale(0.8);
+      @include themed() {
+        color: t('primary-color');
+      }
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.75rem;
+    font-size: 1rem;
+    @include themed() {
+    color: t('input-label-color');
+    }
+    pointer-events: none;
+    transition: 0.3s ease all;
+    transform-origin: left top;
+  }
+
+  .error-message {
+    color: $error-color;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+}
