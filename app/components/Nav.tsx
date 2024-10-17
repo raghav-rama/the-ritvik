@@ -7,16 +7,16 @@ import { usePathname } from "next/navigation";
 import styles from "../styles/layout.module.scss";
 import WalletMultiButton from "./WalletMultiButton";
 
+import logo from "@/public/assets/R.svg";
+
 export const Nav = () => {
   return (
     <div className={styles["theme-dark"]}>
       <nav className={styles.nav}>
+        <Image src={logo} alt="the-ritvik" width={50} height={50} />
         <Link href="/" className={styles.logo}>
           <p>The Ritvik</p>
         </Link>
-        {/* <Link href="/testnet">
-          <button>Testnet</button>
-        </Link> */}
         <WalletMultiButton
           style={{ fontFamily: "Space Grotesk, sans-serif" }}
         />
