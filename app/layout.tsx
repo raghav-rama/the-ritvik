@@ -15,18 +15,18 @@ interface Props {
 export default function RootLayout({ children }: Props) {
   return (
     <StoreProvider>
-      <html lang="en">
-        <head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
-            rel="stylesheet"
-          />
-        </head>
-        <body>
-          <WalletProvider>
-            <section className={styles["theme-dark"]}>
+      <WalletProvider>
+        <html lang="en">
+          <head>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+              rel="stylesheet"
+            />
+          </head>
+          <body>
+            <section>
               <div className={styles.container}>
                 <Nav />
 
@@ -37,12 +37,12 @@ export default function RootLayout({ children }: Props) {
                 </footer>
               </div>
             </section>
-          </WalletProvider>
-          <div id="particles-js"></div>
-          <script src="/assets/particles.min.js" />
-          <script src="/assets/app.js" />
-        </body>
-      </html>
+            <div id="particles-js"></div>
+            <script src="/assets/particles.min.js" />
+            <script src="/assets/app.js" />
+          </body>
+        </html>
+      </WalletProvider>
     </StoreProvider>
   );
 }

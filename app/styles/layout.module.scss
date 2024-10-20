@@ -3,17 +3,6 @@
 @import 'components/button';
 
 .container {
-  @include themed() {
-    background-color: t('background');
-    color: t('text');
-  }
-  display: grid;
-  grid-template-areas:
-    "nav"
-    "main"
-    "footer";
-  grid-template-rows: 60px 1fr 36px;
-  align-items: center;
   min-height: 100vh;
 }
 
@@ -40,7 +29,6 @@
 .footer {
   grid-area: footer;
   justify-self: center;
-  background-color: green;
 }
 
 .nav {
@@ -62,6 +50,7 @@
 
   & button {
     @include button(180px, 50px);
+    @include flex-center(row, 10px);
     font-size: 1rem;
   }
 }
