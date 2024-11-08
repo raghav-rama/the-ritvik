@@ -4,7 +4,7 @@
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
 	import type { PageData } from './$types';
-	import SanityImage from '../../../components/SanityImage.svelte';
+	import SanityImage from '@/components/SanityImage.svelte';
 
 	export let data: PageData;
 	const q = useQuery(data);

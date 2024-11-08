@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { isPreviewing, VisualEditing } from '@sanity/visual-editing/svelte';
 	import { page } from '$app/stores';
-	import LiveMode from '../components/LiveMode.svelte';
+	import LiveMode from '@/components/LiveMode.svelte';
 </script>
 
 {#if $isPreviewing}

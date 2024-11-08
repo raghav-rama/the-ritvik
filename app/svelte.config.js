@@ -19,7 +19,10 @@ const config = {
 				minimumCacheTTL: 300,
 				domains: ['sanity.io']
 			}
-		})
+		}),
+		alias: {
+			'@/*': './src/*'
+		}
 	}
 };
 
