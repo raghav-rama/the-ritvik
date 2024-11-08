@@ -13,8 +13,9 @@ export const load: PageServerLoad = async (event) => {
 		options: { initial },
 		metadata: {
 			title: 'The Ritvik Blog',
-			description: 'A blog about software engineering, blockchain, and spirituality',
-			image: 'https://example.com/image.jpg'
+			description: 'My personal blog. I write about software engineering, web3 and spirituality.',
+			image:
+				'https://raw.githubusercontent.com/raghav-rama/the-ritvik/refs/heads/master/app/static/banner.png'
 		}
 	};
 };
