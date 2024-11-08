@@ -6,4 +6,5 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
+  studioHost: 'theritvik-blog',
 })
