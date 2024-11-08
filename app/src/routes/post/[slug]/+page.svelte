@@ -10,7 +10,15 @@
 	const q = useQuery(data);
 
 	$: ({ data: post } = $q);
+	$: ({ metadata } = data);
 </script>
+
+<svelte:head>
+	<title>{metadata.title}</title>
+	<meta name="description" content={metadata.description} />
+	<meta property="og:image" content={metadata.image} />
+	<meta property="og:type" content="article" />
+</svelte:head>
 
 <section class="post">
 	{#if post.mainImage}

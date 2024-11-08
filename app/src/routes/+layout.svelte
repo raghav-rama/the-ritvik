@@ -13,7 +13,7 @@
 
 <div class="container">
 	<header class="header">
-		<a class="header__title" href="/">Ritvik's Blog</a>
+		<a class="header__title" href="/">The Ritvik Blog</a>
 	</header>
 	<main>
 		<slot />

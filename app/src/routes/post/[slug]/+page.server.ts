@@ -1,4 +1,5 @@
 import { postQuery as query, type Post } from '$lib/sanity/queries';
+import { urlFor } from '@/lib/sanity/image';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (event) => {
@@ -14,6 +15,11 @@ export const load: PageServerLoad = async (event) => {
 	return {
 		query,
 		params,
-		options: { initial }
+		options: { initial },
+		metadata: {
+			title: `${initial.data.title} | The Ritvik Blog`,
+			description: initial.data.excerpt,
+			image: initial.data.mainImage ? urlFor(initial.data.mainImage).url() : undefined
+		}
 	};
 };
