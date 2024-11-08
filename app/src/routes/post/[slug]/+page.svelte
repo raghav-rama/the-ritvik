@@ -27,7 +27,8 @@
 			<p class="post__excerpt">{post.excerpt}</p>
 		{/if}
 		<p class="post__date">
-			{formatDate(post._createdAt)}
+			<span class="post__date--updated"> Updated </span>
+			{formatDate(post._updatedAt)}
 		</p>
 		{#if post.body}
 			<div class="post__content">
@@ -68,7 +69,13 @@
 		margin-top: var(--space-6);
 	}
 
-	.post .post__content blockquote {
+	.post .post__date--updated {
+		font-weight: 200;
+		opacity: 0.7;
+		font-size: var(--font-size-2);
+	}
+
+	/* .post .post__content blockquote {
 		border-left: 5px solid var(--black);
 		padding-left: var(--space-3);
 		margin-left: var(--space-4);
@@ -77,7 +84,7 @@
 	.post .post__content a {
 		color: var(--blue-600);
 		text-decoration: none;
-	}
+	} */
 
 	.post .post__title {
 		font-family: var(--font-family-sans);

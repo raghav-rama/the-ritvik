@@ -9,6 +9,7 @@ export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | ord
 export interface Post {
 	_type: 'post';
 	_createdAt: string;
+	_updatedAt: string;
 	title?: string;
 	slug: Slug;
 	excerpt?: string;
