@@ -4,6 +4,7 @@
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
 	import type { PageData } from './$types';
+	import SanityImage from '../../../components/SanityImage.svelte';
 
 	export let data: PageData;
 	const q = useQuery(data);
@@ -32,7 +33,14 @@
 		</p>
 		{#if post.body}
 			<div class="post__content">
-				<PortableText components={{}} value={post.body} />
+				<PortableText
+					components={{
+						types: {
+							image: SanityImage
+						}
+					}}
+					value={post.body}
+				/>
 			</div>
 		{/if}
 	</div>

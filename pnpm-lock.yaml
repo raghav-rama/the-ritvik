@@ -17,6 +17,9 @@ importers:
 
   app:
     dependencies:
+      '@sanity/asset-utils':
+        specifier: ^2.1.0
+        version: 2.1.0
       '@sanity/client':
         specifier: ^6.22.3
         version: 6.22.3(debug@4.3.7)
