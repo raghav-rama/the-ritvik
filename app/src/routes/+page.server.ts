@@ -10,6 +10,11 @@ export const load: PageServerLoad = async (event) => {
 	// format you like.
 	return {
 		query,
-		options: { initial }
+		options: { initial },
+		metadata: {
+			title: 'The Ritvik Blog',
+			description: 'A blog about software engineering, blockchain, and spirituality',
+			image: 'https://example.com/image.jpg'
+		}
 	};
 };
