@@ -34,7 +34,7 @@
 					stroke-width="1.2"
 				/></svg
 			>
-			by Ritvik
+			by <a href="/contact">Ritvik</a>
 			<a
 				class="footer__text--link"
 				href="https://github.com/raghav-rama/the-ritvik"
