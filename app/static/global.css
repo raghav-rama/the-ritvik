@@ -40,12 +40,15 @@
 	--line-height-11: 96px;
 	--line-height-12: 128px;
 
+
 	--white: #fff;
 	--black: #101112;
 	--gray-200: #ced2d9;
 	--gray-600: #6e7683;
 	--blue-600: #1e61cd;
 	--magenta-100: #f9d7eb;
+	--orange-100: #ffd9b3;
+	--yellow-100: #fff8e1;
 
 	--max-width-0: 320px;
 	--max-width-1: 768px;
