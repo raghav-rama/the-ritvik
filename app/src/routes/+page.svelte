@@ -33,6 +33,8 @@
 	<meta property="og:title" content={metadata.title} />
 	<meta property="og:description" content={metadata.description} />
 	<meta property="og:image" content={metadata.image} />
+	<meta property="og:site_name" content="The Ritvik Blog" />
+	<meta property="og:url" content="https://www.theritvik.in" />
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
