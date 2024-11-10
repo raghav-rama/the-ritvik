@@ -62,7 +62,14 @@
 			"author": {
 				"@type": "Person",
 				"name": "Ritvik Singh",
-				"url": "https://www.theritvik.in"
+				"url": "https://www.theritvik.in",
+				"sameAs": [
+					"https://github.com/raghav-rama",
+					"https://www.linkedin.com/in/ritviksingh258",
+					"https://twitter.com/Raghav__Rama",
+					"https://t.me/hackerrboy",
+					"https://www.youtube.com/@hackerboy5328"
+				]
 			},
 			"publisher": {
 				"@type": "Organization",

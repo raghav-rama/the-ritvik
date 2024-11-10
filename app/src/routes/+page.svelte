@@ -54,4 +54,22 @@
 
 	<meta name="language" content="English" />
 	<meta name="geo.region" content="IN" />
+
+	{@html `
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Ritvik Singh",
+			"url": "https://theritvik.in",
+			"sameAs": [
+				"https://github.com/raghav-rama",
+				"https://www.linkedin.com/in/ritviksingh258",
+				"https://twitter.com/Raghav__Rama",
+				"https://t.me/hackerrboy",
+				"https://www.youtube.com/@hackerboy5328"
+			]
+		}
+	</script>
+	`}
 </svelte:head>
