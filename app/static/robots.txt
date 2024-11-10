@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /post/
+Allow: /contact/
+Disallow: /preview/
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Googlebot
+Crawl-delay: 10
+
+User-agent: Bingbot
+Crawl-delay: 10
+
+Sitemap: https://www.theritvik.in/sitemap.xml
