@@ -24,6 +24,8 @@
 <svelte:head>
 	<title>{metadata.title}</title>
 	<meta name="description" content={metadata.description} />
+	<link rel="canonical" href="https://www.theritvik.in" />
+	<meta name="robots" content="index, follow" />
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
@@ -32,14 +34,24 @@
 	<meta property="og:image" content={metadata.image} />
 	<meta property="og:site_name" content="The Ritvik Blog" />
 	<meta property="og:url" content="https://www.theritvik.in" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="article:author" content="Ritvik Singh" />
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={metadata.title} />
 	<meta name="twitter:description" content={metadata.description} />
 	<meta name="twitter:image" content={metadata.image} />
+	<meta name="twitter:creator" content="@Raghav__Rama" />
+	<meta name="twitter:site" content="@Raghav__Rama" />
 
-	<meta name="keywords" content="Software Engineer, Ritvik Singh, Blockchain, Web3, Spirituality" />
+	<meta
+		name="keywords"
+		content="Software Engineer, Ritvik Singh, Blockchain, Web3, Spirituality, Technology Blog, Web Development"
+	/>
 	<meta name="author" content="Ritvik Singh" />
 	<meta name="theme-color" content="#FF0000" />
+
+	<meta name="language" content="English" />
+	<meta name="geo.region" content="IN" />
 </svelte:head>
