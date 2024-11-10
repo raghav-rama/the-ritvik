@@ -61,7 +61,7 @@
 			"@context": "https://schema.org",
 			"@type": "Person",
 			"name": "Ritvik Singh",
-			"url": "https://theritvik.in",
+			"url": "https://www.theritvik.in",
 			"sameAs": [
 				"https://github.com/raghav-rama",
 				"https://www.linkedin.com/in/ritviksingh258",

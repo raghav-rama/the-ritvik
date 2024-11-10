@@ -14,8 +14,7 @@ export const load: PageServerLoad = async (event) => {
 		metadata: {
 			title: 'The Ritvik Blog',
 			description: 'My personal blog. I write about software engineering, web3 and spirituality.',
-			image:
-				'https://raw.githubusercontent.com/raghav-rama/the-ritvik/refs/heads/master/app/static/banner.png'
+			image: 'https://www.theritvik.in/banner.png'
 		}
 	};
 };

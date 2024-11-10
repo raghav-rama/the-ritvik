@@ -133,7 +133,7 @@
 	<meta name="description" content={metadata.description} />
 	<meta property="og:image" content={metadata.image} />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://theritvik.in/contact" />
+	<meta property="og:url" content="https://www.theritvik.in/contact" />
 	<meta property="og:site_name" content="The Ritvik Blog" />
 	<meta property="og:title" content={metadata.title} />
 	<meta property="og:description" content={metadata.description} />
@@ -151,7 +151,7 @@
 			"@context": "https://schema.org",
 			"@type": "Person",
 			"name": "Ritvik Singh",
-			"url": "https://theritvik.in",
+			"url": "https://www.theritvik.in",
 			"sameAs": [
 				"https://github.com/raghav-rama",
 				"https://www.linkedin.com/in/ritviksingh258",

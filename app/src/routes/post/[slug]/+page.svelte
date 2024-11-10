@@ -12,7 +12,7 @@
 
 	$: ({ data: post } = $q);
 
-	$: articleUrl = `https://theritvik.in/post/${post.slug.current}`;
+	$: articleUrl = `https://www.theritvik.in/post/${post.slug.current}`;
 	$: formattedExcerpt = post.excerpt?.substring(0, 160) || '';
 </script>
 

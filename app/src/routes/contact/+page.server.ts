@@ -7,7 +7,7 @@ export const load: PageServerLoad = async (event) => {
 		metadata: {
 			title: 'Contact | The Ritvik Blog',
 			description: "Can't resist the urge to contact me? Haha, I'm flattered!",
-			image: 'https://theritvik.in/banner.png'
+			image: 'https://www.theritvik.in/banner.png'
 		}
 	};
 };
