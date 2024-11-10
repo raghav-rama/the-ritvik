@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { PageData } from '../$types';
 	import ContactCard from '@/components/ContactCard.svelte';
+	import { onMount } from 'svelte';
+
 	export let data: PageData;
 
 	const contactCards = [
@@ -21,7 +23,88 @@
 	];
 
 	$: ({ metadata } = data);
+
+	let canvas: HTMLCanvasElement;
+	let ctx: CanvasRenderingContext2D;
+	let particles: Particle[] = [];
+
+	class Particle {
+		x: number;
+		y: number;
+		size: number;
+		speedX: number;
+		speedY: number;
+
+		constructor(x: number, y: number) {
+			this.x = x;
+			this.y = y;
+			this.size = Math.random() * 3;
+			this.speedX = Math.random() * 2 - 1;
+			this.speedY = Math.random() * 2 - 1;
+		}
+
+		update() {
+			this.x += this.speedX;
+			this.y += this.speedY;
+
+			if (this.x > window.innerWidth || this.x < 0) this.speedX *= -1;
+			if (this.y > window.innerHeight || this.y < 0) this.speedY *= -1;
+		}
+
+		draw() {
+			if (!ctx) return;
+			ctx.fillStyle = 'rgba(255, 136, 0, 0.5)';
+			ctx.beginPath();
+			ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+			ctx.fill();
+		}
+	}
+
+	function createParticles() {
+		for (let i = 0; i < 50; i++) {
+			particles.push(
+				new Particle(Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+			);
+		}
+	}
+
+	function animate() {
+		if (!ctx || !canvas) return;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		particles.forEach((particle) => {
+			particle.update();
+			particle.draw();
+		});
+
+		requestAnimationFrame(animate);
+	}
+
+	onMount(() => {
+		if (!canvas) return;
+		ctx = canvas.getContext('2d')!;
+
+		const resizeCanvas = () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		};
+
+		window.addEventListener('resize', resizeCanvas);
+		resizeCanvas();
+
+		createParticles();
+		animate();
+
+		return () => {
+			window.removeEventListener('resize', resizeCanvas);
+		};
+	});
 </script>
+
+<canvas
+	bind:this={canvas}
+	style="position: fixed; top: 0; left: 0; z-index: -1; background: transparent;"
+/>
 
 <section>
 	<h1>Can't resist the urge to contact me? Haha, I'm flattered!</h1>
@@ -66,6 +149,8 @@
 	section {
 		margin: 0 auto;
 		padding: 0 0.5rem;
+		position: relative;
+		z-index: 1;
 	}
 	.cards-container {
 		display: flex;
