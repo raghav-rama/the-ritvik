@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { isPreviewing, VisualEditing } from '@sanity/visual-editing/svelte';
+	import { navigating } from '$app/stores';
+	import Loader from '@/components/Loader.svelte';
 	import { page } from '$app/stores';
 	import LiveMode from '@/components/LiveMode.svelte';
 </script>
@@ -16,7 +18,11 @@
 		<a class="header__title" href="/">The Ritvik Blog</a>
 	</header>
 	<main>
-		<slot />
+		{#if $navigating}
+			<Loader />
+		{:else}
+			<slot />
+		{/if}
 	</main>
 	<footer class="footer">
 		<p class="footer__text">
