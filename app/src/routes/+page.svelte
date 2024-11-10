@@ -25,9 +25,6 @@
 	<title>{metadata.title}</title>
 	<meta name="description" content={metadata.description} />
 
-	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="/favicon.png" />
-
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={metadata.title} />

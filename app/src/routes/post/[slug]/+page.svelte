@@ -5,6 +5,7 @@
 	import { urlFor } from '$lib/sanity/image';
 	import type { PageData } from './$types';
 	import SanityImage from '@/components/SanityImage.svelte';
+	import NormalTextSanity from '@/components/NormalTextSanity.svelte';
 
 	export let data: PageData;
 	const q = useQuery(data);
@@ -45,7 +46,8 @@
 					components={{
 						types: {
 							image: SanityImage
-						}
+						},
+						listItem: NormalTextSanity
 					}}
 					value={post.body}
 				/>
