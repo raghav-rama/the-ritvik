@@ -4,7 +4,7 @@
 	export let data: PageData;
 
 	const contactCards = [
-		{ href: 'https://github.com/raghav-rama', icon: 'line-md:github', title: 'GitHub' },
+		{ href: 'https://github.com/raghav-rama', icon: 'line-md:github-loop', title: 'GitHub' },
 		{
 			href: 'https://www.linkedin.com/in/ritviksingh258',
 			icon: 'line-md:linkedin',
