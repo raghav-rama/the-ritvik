@@ -54,6 +54,12 @@
 	<meta property="og:site_name" content="The Ritvik Blog" />
 	<meta property="og:title" content={metadata.title} />
 	<meta property="og:description" content={metadata.description} />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={metadata.title} />
+	<meta name="twitter:description" content={metadata.description} />
+	<meta name="twitter:image" content={metadata.image} />
 </svelte:head>
 
 <style>
