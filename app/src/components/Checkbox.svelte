@@ -89,4 +89,10 @@
 		font-size: var(--font-size-2);
 		color: var(--black);
 	}
+
+	@media (max-width: 480px) {
+		.label {
+			font-size: var(--font-size-1);
+		}
+	}
 </style>

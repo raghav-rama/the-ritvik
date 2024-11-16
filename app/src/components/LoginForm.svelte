@@ -191,7 +191,20 @@
 			max-width: none;
 			border-radius: 8px;
 			min-height: 100%;
-			width: auto;
+			width: 270px;
+		}
+
+		.form-options {
+			font-size: var(--font-size-1);
+		}
+
+		.register-prompt {
+			margin: 0;
+			font-size: var(--font-size-1);
+		}
+
+		.forgot-link {
+			font-size: var(--font-size-1);
 		}
 
 		.modal-backdrop {
