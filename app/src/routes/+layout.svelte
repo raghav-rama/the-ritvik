@@ -4,6 +4,9 @@
 	import Loader from '@/components/Loader.svelte';
 	import { page } from '$app/stores';
 	import LiveMode from '@/components/LiveMode.svelte';
+	import Button from '@/components/Button.svelte';
+	import { isLoginModalOpen } from '@/lib/store';
+	import LoginForm from '@/components/LoginForm.svelte';
 </script>
 
 {#if $isPreviewing}
@@ -16,6 +19,9 @@
 <div class="container">
 	<header class="header">
 		<a class="header__title" href="/">The Ritvik Blog</a>
+		<Button variant="outlined" size="small" on:click={() => isLoginModalOpen.set(true)}>
+			Login
+		</Button>
 	</header>
 	<main>
 		{#if $navigating}
@@ -65,6 +71,10 @@
 	<LiveMode />
 {/if}
 
+{#if $isLoginModalOpen}
+	<LoginForm />
+{/if}
+
 <svelte:head>
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="/favicon.png" />
@@ -81,6 +91,7 @@
 
 	.header {
 		display: flex;
+		justify-content: space-between;
 		padding: 0 var(--space-1);
 		border-bottom: 1px solid #ced2d9;
 
