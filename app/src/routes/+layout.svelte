@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+
 	import { isPreviewing, VisualEditing } from '@sanity/visual-editing/svelte';
 	import { navigating } from '$app/stores';
 	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '@/lib/store';
@@ -10,6 +12,8 @@
 	import LoginForm from '@/components/LoginForm.svelte';
 	import SignupForm from '@/components/SignupForm.svelte';
 	import ForgotPassword from '@/components/ForgotPassword.svelte';
+
+	injectSpeedInsights();
 </script>
 
 {#if $isPreviewing}
