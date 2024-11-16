@@ -13,7 +13,8 @@ export const load: PageServerLoad = async (event) => {
 		options: { initial },
 		metadata: {
 			title: 'The Ritvik Blog',
-			description: 'My personal blog. I write about software engineering, web3 and spirituality.',
+			description:
+				"Dive into the latest in software engineering, blockchain technology, and Web3 development, where innovation meets practicality. Beyond the code, discover how technology can intersect with spiritual growth and mindful living, creating a balance between cutting-edge solutions and personal transformation.\n\n Join me on this journey of technical expertise, thoughtful innovation, and purposeful growth, shaping a future that's both impactful and human-centered.",
 			image: 'https://www.theritvik.in/banner.png'
 		}
 	};

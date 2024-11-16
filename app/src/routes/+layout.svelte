@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { isPreviewing, VisualEditing } from '@sanity/visual-editing/svelte';
 	import { navigating } from '$app/stores';
-	import Loader from '@/components/Loader.svelte';
+	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '@/lib/store';
 	import { page } from '$app/stores';
+
+	import Loader from '@/components/Loader.svelte';
 	import LiveMode from '@/components/LiveMode.svelte';
 	import Button from '@/components/Button.svelte';
-	import { isLoginModalOpen } from '@/lib/store';
 	import LoginForm from '@/components/LoginForm.svelte';
+	import SignupForm from '@/components/SignupForm.svelte';
+	import ForgotPassword from '@/components/ForgotPassword.svelte';
 </script>
 
 {#if $isPreviewing}
@@ -73,6 +76,14 @@
 
 {#if $isLoginModalOpen}
 	<LoginForm />
+{/if}
+
+{#if $isSignupModalOpen}
+	<SignupForm />
+{/if}
+
+{#if $isForgotPasswordModalOpen}
+	<ForgotPassword />
 {/if}
 
 <svelte:head>

@@ -1,13 +1,16 @@
 <script lang="ts">
-	import { isLoginModalOpen } from '@/lib/store';
+	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '@/lib/store';
 	import Button from '@/components/Button.svelte';
 	import Input from '@/components/Input.svelte';
 	import Checkbox from '@/components/Checkbox.svelte';
+	import Modal from '@/components/Modal.svelte';
 
 	let email = '';
 	let password = '';
 	let rememberMe = false;
 	let loading = false;
+
+	$: canSubmit = email && password;
 
 	async function handleSubmit() {
 		loading = true;
@@ -19,113 +22,57 @@
 	function closeModal() {
 		isLoginModalOpen.set(false);
 	}
-
-	// Close modal when clicking escape key
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
-			closeModal();
-		}
-	}
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<Modal id="login" isOpen={$isLoginModalOpen} on:close={closeModal}>
+	<form class="login-form" on:submit|preventDefault={handleSubmit}>
+		<h2>Login</h2>
 
-{#if $isLoginModalOpen}
-	<div
-		class="modal-backdrop"
-		on:click={closeModal}
-		on:keydown={closeModal}
-		role="button"
-		tabindex="0"
-	>
-		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<div
-			class="modal-content"
-			on:click|stopPropagation
-			on:keydown|stopPropagation
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="login-title"
-			tabindex="-1"
-		>
-			<form class="login-form" on:submit|preventDefault={handleSubmit}>
-				<h2 id="login-title">Login</h2>
-
-				<div class="form-group">
-					<Input
-						type="email"
-						id="email"
-						bind:value={email}
-						required
-						placeholder="Enter your email"
-					/>
-				</div>
-
-				<div class="form-group">
-					<Input
-						type="password"
-						id="password"
-						bind:value={password}
-						required
-						placeholder="Enter your password"
-					/>
-				</div>
-
-				<div class="form-options">
-					<Checkbox bind:checked={rememberMe} label="Remember me" />
-					<a href="/" class="forgot-link">Forgot password?</a>
-				</div>
-
-				<Button fullWidth type="submit" size="large" disabled={loading}>
-					{loading ? 'Logging in...' : 'Login'}
-				</Button>
-
-				<p class="register-prompt">
-					New here? <a href="/">Create an account</a>
-				</p>
-			</form>
+		<div class="form-group">
+			<Input type="email" id="email" bind:value={email} required placeholder="Enter your email" />
 		</div>
-	</div>
-{/if}
+
+		<div class="form-group">
+			<Input
+				type="password"
+				id="password"
+				bind:value={password}
+				required
+				placeholder="Enter your password"
+			/>
+		</div>
+
+		<div class="form-options">
+			<Checkbox bind:checked={rememberMe} label="Remember me" />
+			<a
+				href="#forgot-password"
+				class="forgot-link"
+				on:click|preventDefault={() => {
+					closeModal();
+					isForgotPasswordModalOpen.set(true);
+				}}
+			>
+				Forgot password?
+			</a>
+		</div>
+
+		<Button fullWidth type="submit" size="large" disabled={loading || !canSubmit}>
+			{loading ? 'Logging in...' : 'Login'}
+		</Button>
+
+		<p class="register-prompt">
+			New here? <a
+				href="#signup"
+				on:click|preventDefault={() => {
+					closeModal();
+					isSignupModalOpen.set(true);
+				}}>Create an account</a
+			>
+		</p>
+	</form>
+</Modal>
 
 <style>
-	.modal-backdrop {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.5);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 1000;
-	}
-
-	.modal-content {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		animation: slideIn 0.2s ease-out;
-		z-index: 1001;
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-	}
-
-	@keyframes slideIn {
-		from {
-			transform: translateY(-20px);
-			opacity: 0;
-		}
-		to {
-			transform: translateY(0);
-			opacity: 1;
-		}
-	}
-
 	.login-form {
 		width: 600px;
 		height: 600px;
@@ -192,6 +139,7 @@
 			border-radius: 8px;
 			min-height: 100%;
 			width: 270px;
+			height: auto;
 		}
 
 		.form-options {
@@ -205,15 +153,6 @@
 
 		.forgot-link {
 			font-size: var(--font-size-1);
-		}
-
-		.modal-backdrop {
-			padding: 0;
-		}
-
-		h2 {
-			font-size: var(--font-size-4);
-			margin-bottom: var(--space-3);
 		}
 
 		.form-group {
