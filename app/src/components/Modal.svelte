@@ -55,6 +55,8 @@
 		width: 100%;
 		height: 100%;
 		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -77,6 +79,12 @@
 		to {
 			transform: translateY(0);
 			opacity: 1;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.modal-backdrop {
+			background: rgba(0, 0, 0, 0.8);
 		}
 	}
 
