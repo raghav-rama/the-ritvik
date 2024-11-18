@@ -1,14 +1,19 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-
 	const dispatch = createEventDispatcher();
 
 	export let isOpen = false;
 	export let title: string | undefined = undefined;
 	export let id: string | undefined = undefined;
 
+	let isClosing = false;
+
 	function closeModal() {
-		dispatch('close');
+		isClosing = true;
+		setTimeout(() => {
+			dispatch('close');
+			isClosing = false;
+		}, 200);
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -20,11 +25,13 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-{#if isOpen}
+{#if isOpen || isClosing}
 	<div
 		class="modal-backdrop"
+		class:fade-out={isClosing}
+		class:fade-in={!isClosing}
 		on:click={closeModal}
-		on:keydown={closeModal}
+		on:keydown={handleKeydown}
 		role="button"
 		tabindex="0"
 	>
@@ -32,6 +39,8 @@
 		<div
 			{id}
 			class="modal-content"
+			class:slide-in={!isClosing}
+			class:slide-out={isClosing}
 			on:click|stopPropagation
 			on:keydown|stopPropagation
 			role="dialog"
@@ -61,14 +70,32 @@
 		align-items: center;
 		justify-content: center;
 		z-index: 1000;
+		transition: opacity 200ms ease-out;
+	}
+
+	.modal-backdrop.fade-out {
+		opacity: 0;
+	}
+
+	.modal-backdrop.fade-in {
+		opacity: 1;
 	}
 
 	.modal-content {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		animation: slideIn 0.2s ease-out;
 		z-index: 1001;
+		animation-duration: 200ms;
+		animation-timing-function: ease-out;
+	}
+
+	.slide-in {
+		animation-name: slideIn;
+	}
+
+	.slide-out {
+		animation-name: slideOut;
 	}
 
 	@keyframes slideIn {
@@ -79,6 +106,17 @@
 		to {
 			transform: translateY(0);
 			opacity: 1;
+		}
+	}
+
+	@keyframes slideOut {
+		from {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		to {
+			transform: translateY(20px);
+			opacity: 0;
 		}
 	}
 
