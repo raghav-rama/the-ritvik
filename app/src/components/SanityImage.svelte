@@ -28,7 +28,7 @@
 
 	img {
 		display: block;
-		max-width: 100%;
+		max-width: 70%;
 		height: auto;
 		margin: 0 auto;
 		box-shadow:
