@@ -37,6 +37,12 @@
 			rgba(17, 17, 26, 0.1) 0px 16px 56px;
 	}
 
+	@media (max-width: 768px) {
+		img {
+			max-width: 100%;
+		}
+	}
+
 	figcaption {
 		text-align: center;
 		font-size: var(--font-size-1);
