@@ -4,6 +4,7 @@
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 	export let size: 'small' | 'medium' | 'large' = 'medium';
 	export let fullWidth: boolean = false;
+	export let formaction: string | undefined = undefined;
 
 	function createRipple(event: MouseEvent) {
 		const button = event.currentTarget as HTMLButtonElement;
@@ -33,6 +34,7 @@
 	{disabled}
 	class="button {variant} {size}"
 	class:full-width={fullWidth}
+	{formaction}
 	on:click
 	on:mousedown={createRipple}
 >
