@@ -9,6 +9,7 @@
 	export let error: string = '';
 	export let fullWidth: boolean = false;
 	export let id: string = '';
+	export let name: string = '';
 
 	const dispatch = createEventDispatcher();
 
@@ -36,6 +37,7 @@
 	<div class="input-wrapper" class:focused class:error={!!error} class:disabled>
 		<label class:active={focused || value} for={id}>{placeholder}</label>
 		<input
+			{name}
 			{type}
 			{required}
 			{disabled}
