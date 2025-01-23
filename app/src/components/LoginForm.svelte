@@ -25,15 +25,23 @@
 </script>
 
 <Modal id="login" isOpen={$isLoginModalOpen} on:close={closeModal}>
-	<form class="login-form" on:submit|preventDefault={handleSubmit}>
+	<form class="login-form" method="post" action="?/login">
 		<h2>Login</h2>
 
 		<div class="form-group">
-			<Input type="email" id="email" bind:value={email} required placeholder="Enter your email" />
+			<Input
+				name="email"
+				type="email"
+				id="email"
+				bind:value={email}
+				required
+				placeholder="Enter your email"
+			/>
 		</div>
 
 		<div class="form-group">
 			<Input
+				name="password"
 				type="password"
 				id="password"
 				bind:value={password}
