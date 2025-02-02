@@ -30,7 +30,7 @@
 </script>
 
 <Modal id="signup" isOpen={$isSignupModalOpen} on:close={closeModal}>
-	<form class="signup-form" on:submit|preventDefault={handleSubmit}>
+	<form class="signup-form" method="post" action="?/signup">
 		<h2>Create Account</h2>
 
 		<div class="form-group">
@@ -38,13 +38,21 @@
 		</div>
 
 		<div class="form-group">
-			<Input type="email" id="email" bind:value={email} required placeholder="Email address" />
+			<Input
+				type="email"
+				id="email"
+				name="email"
+				bind:value={email}
+				required
+				placeholder="Email address"
+			/>
 		</div>
 
 		<div class="form-group">
 			<Input
 				type="password"
 				id="password"
+				name="password"
 				bind:value={password}
 				required
 				placeholder="Create password"
