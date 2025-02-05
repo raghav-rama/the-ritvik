@@ -22,7 +22,9 @@
 			{post.title}
 		</h3>
 		{#if post.excerpt}
-			<p class="card__excerpt">{post.excerpt}</p>
+			<p class="card__excerpt">
+				{post.excerpt.length > 75 ? post.excerpt.slice(0, 75) + '...' : post.excerpt}
+			</p>
 		{/if}
 		<p class="card__date">
 			{formatDate(post._createdAt)}
