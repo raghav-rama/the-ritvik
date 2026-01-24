@@ -1,3 +1,5 @@
+# AGENTS.md
+
 ## Project Structure
 
 - Frontend
@@ -9,3 +11,10 @@
 - CMS
   - The CMS used is sanity.io
   - It lives in the `studio` folder
+
+## Project Setup
+
+- `pnpm i`
+- `pnpm --filter studio run login`
+- replace .env.example values with real values
+- `pnpm run dev`

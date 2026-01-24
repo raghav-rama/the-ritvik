@@ -17,7 +17,7 @@
 			icon: 'line-md:twitter-x',
 			title: 'X (formerly Twitter)'
 		},
-		{ href: 'https://t.me/hackerrboy', icon: 'line-md:telegram', title: 'Telegram' },
+		{ href: 'https://t.me/TheRitvikS', icon: 'line-md:telegram', title: 'Telegram' },
 		{ href: 'https://www.youtube.com/@hackerboy5328', icon: 'line-md:youtube', title: 'YouTube' },
 		{ href: 'mailto:hi@theritvik.in', icon: 'line-md:email', title: 'Email' }
 	];
