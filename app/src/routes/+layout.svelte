@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-
 	import { PreviewMode, VisualEditing, QueryLoader } from '@sanity/sveltekit';
 	import type { LayoutProps } from './$types';
 	import { navigating } from '$app/stores';
 	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '$lib/store';
 	import { client } from '$lib/sanity/client';
-
 	import Loader from '@/components/Loader.svelte';
 	import LoginForm from '@/components/LoginForm.svelte';
 	import SignupForm from '@/components/SignupForm.svelte';
@@ -18,24 +16,22 @@
 	const { previewEnabled } = $derived(data);
 </script>
 
-<!-- <PreviewMode enabled={previewEnabled}>
-	<VisualEditing enabled={previewEnabled}>
-		<QueryLoader enabled={previewEnabled} {client}>
-			{@render children()}
-		</QueryLoader>
-	</VisualEditing>
-</PreviewMode> -->
-
 <div class="container">
 	<header class="header">
 		<a class="header__title" href="/">The Ritvik Blog</a>
 	</header>
 	<main>
-		{#if $navigating}
-			<Loader />
-		{:else}
-			{@render children()}
-		{/if}
+		<PreviewMode enabled={previewEnabled}>
+			<VisualEditing enabled={previewEnabled}>
+				<QueryLoader enabled={previewEnabled} {client}>
+					{#if $navigating}
+						<Loader />
+					{:else}
+						{@render children()}
+					{/if}
+				</QueryLoader>
+			</VisualEditing>
+		</PreviewMode>
 	</main>
 	<footer class="footer">
 		<p class="footer__text">

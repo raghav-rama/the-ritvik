@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { useQuery } from '@sanity/sveltekit';
 	import Card from '@/components/Card.svelte';
 	import Welcome from '@/components/Welcome.svelte';
 	import type { PageProps } from './$types';
 
 	const props: PageProps = $props();
 	const { data } = props;
-	const posts = $derived(data.options.initial);
+	const query = useQuery(data);
+	const posts = $derived($query.data ?? []);
 	const metadata = $derived(data.metadata);
 </script>
 

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { PortableText } from '@portabletext/svelte';
+	import { useQuery } from '@sanity/sveltekit';
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
 	import type { PageProps } from './$types';
@@ -8,118 +9,131 @@
 
 	const props: PageProps = $props();
 	const { data } = props;
-	const post = $derived(data.options.initial);
-	const formattedExcerpt = $derived(post.excerpt?.substring(0, 160) || '');
-	const articleUrl = $derived(`https://www.theritvik.in/post/${post.slug.current}`);
+	const query = useQuery(data);
+	const post = $derived($query.data ?? null);
+	const formattedExcerpt = $derived(post?.excerpt?.substring(0, 160) ?? '');
+	const articleUrl = $derived(
+		post ? `https://www.theritvik.in/post/${post.slug.current}` : 'https://www.theritvik.in'
+	);
+	const postImageUrl = $derived(post?.mainImage ? urlFor(post.mainImage).url() : '');
+	const pageTitle = $derived(post ? `${post.title} | The Ritvik Blog` : 'The Ritvik Blog');
+	const jsonLd = $derived(
+		post
+			? JSON.stringify({
+					'@context': 'https://schema.org',
+					'@type': 'BlogPosting',
+					headline: post.title,
+					image: postImageUrl,
+					datePublished: post._createdAt,
+					dateModified: post._updatedAt,
+					author: {
+						'@type': 'Person',
+						name: 'Ritvik Singh',
+						url: 'https://www.theritvik.in',
+						sameAs: [
+							'https://github.com/raghav-rama',
+							'https://www.linkedin.com/in/ritviksingh258',
+							'https://twitter.com/Raghav__Rama',
+							'https://t.me/hackerrboy',
+							'https://www.youtube.com/@hackerboy5328'
+						]
+					},
+					publisher: {
+						'@type': 'Organization',
+						name: 'The Ritvik Blog',
+						logo: {
+							'@type': 'ImageObject',
+							url: 'https://www.theritvik.in/banner.png'
+						}
+					},
+					description: formattedExcerpt,
+					mainEntityOfPage: {
+						'@type': 'WebPage',
+						'@id': articleUrl
+					}
+				})
+			: ''
+	);
 </script>
 
 <svelte:head>
-	<title>{post.title} | The Ritvik Blog</title>
-	<meta name="description" content={formattedExcerpt} />
-	<link rel="canonical" href={articleUrl} />
-	<meta name="robots" content="index, follow" />
+	<title>{pageTitle}</title>
+	{#if post}
+		<meta name="description" content={formattedExcerpt} />
+		<link rel="canonical" href={articleUrl} />
+		<meta name="robots" content="index, follow" />
 
-	<!-- Open Graph / Facebook -->
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content={post.title} />
-	<meta property="og:description" content={formattedExcerpt} />
-	<meta property="og:image" content={post.mainImage ? urlFor(post.mainImage).url() : ''} />
-	<meta property="og:image:alt" content={`Cover image for ${post.title}`} />
-	<meta property="og:url" content={articleUrl} />
-	<meta property="og:site_name" content="The Ritvik Blog" />
-	<meta property="og:locale" content="en_US" />
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content={post.title} />
+		<meta property="og:description" content={formattedExcerpt} />
+		<meta property="og:image" content={postImageUrl} />
+		<meta property="og:image:alt" content={`Cover image for ${post.title}`} />
+		<meta property="og:url" content={articleUrl} />
+		<meta property="og:site_name" content="The Ritvik Blog" />
+		<meta property="og:locale" content="en_US" />
 
-	<!-- Schema.org -->
-	<meta property="article:published_time" content={post._createdAt} />
-	<meta property="article:modified_time" content={post._updatedAt} />
-	<meta property="article:author" content="Ritvik Singh" />
+		<!-- Schema.org -->
+		<meta property="article:published_time" content={post._createdAt} />
+		<meta property="article:modified_time" content={post._updatedAt} />
+		<meta property="article:author" content="Ritvik Singh" />
 
-	<!-- Twitter -->
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={post.title} />
-	<meta name="twitter:description" content={formattedExcerpt} />
-	<meta name="twitter:image" content={post.mainImage ? urlFor(post.mainImage).url() : ''} />
-	<meta name="twitter:creator" content="@Raghav__Rama" />
-	<meta name="twitter:site" content="@Raghav__Rama" />
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={post.title} />
+		<meta name="twitter:description" content={formattedExcerpt} />
+		<meta name="twitter:image" content={postImageUrl} />
+		<meta name="twitter:creator" content="@Raghav__Rama" />
+		<meta name="twitter:site" content="@Raghav__Rama" />
 
-	<meta name="author" content="Ritvik Singh" />
+		<meta name="author" content="Ritvik Singh" />
 
-	<meta name="theme-color" content="#FF0000" />
+		<meta name="theme-color" content="#FF0000" />
 
-	<!-- Schema.org -->
-	{@html `
-	<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "BlogPosting",
-			"headline": "${post.title}",
-			"image": "${post.mainImage ? urlFor(post.mainImage).url() : ''}",
-			"datePublished": "${post._createdAt}",
-			"dateModified": "${post._updatedAt}",
-			"author": {
-				"@type": "Person",
-				"name": "Ritvik Singh",
-				"url": "https://www.theritvik.in",
-				"sameAs": [
-					"https://github.com/raghav-rama",
-					"https://www.linkedin.com/in/ritviksingh258",
-					"https://twitter.com/Raghav__Rama",
-					"https://t.me/hackerrboy",
-					"https://www.youtube.com/@hackerboy5328"
-				]
-			},
-			"publisher": {
-				"@type": "Organization",
-				"name": "The Ritvik Blog",
-				"logo": {
-					"@type": "ImageObject",
-					"url": "https://www.theritvik.in/banner.png"
-				}
-			},
-			"description": "${formattedExcerpt.replace(/"/g, '\\"')}",
-			"mainEntityOfPage": {
-				"@type": "WebPage",
-				"@id": "${articleUrl}"
-			}
-		}
-	</script>
-	`}
+		{#if jsonLd}
+			<script type="application/ld+json">{jsonLd}</script>
+		{/if}
+	{/if}
 </svelte:head>
 
-<section class="post">
-	{#if post.mainImage}
-		<img
-			class="post__cover"
-			src={urlFor(post.mainImage).url()}
-			alt="Cover image for {post.title}"
-		/>
-	{:else}
-		<div class="post__cover--none"></div>
-	{/if}
-	<div class="post__container">
-		<h1 class="post__title">{post.title}</h1>
-		{#if post.excerpt}
-			<p class="post__excerpt">{post.excerpt}</p>
+{#if post}
+	<section class="post">
+		{#if post.mainImage}
+			<img class="post__cover" src={postImageUrl} alt="Cover image for {post.title}" />
+		{:else}
+			<div class="post__cover--none"></div>
 		{/if}
-		<p class="post__date">
-			<span class="post__date--updated"> Updated </span>
-			{formatDate(post._updatedAt)}
-		</p>
-		{#if post.body}
-			<div class="post__content">
-				<PortableText
-					components={{
-						types: {
-							image: SanityImage
-						},
-						listItem: NormalTextSanity
-					}}
-					value={post.body}
-				/>
-			</div>
-		{/if}
-	</div>
-</section>
+		<div class="post__container">
+			<h1 class="post__title">{post.title}</h1>
+			{#if post.excerpt}
+				<p class="post__excerpt">{post.excerpt}</p>
+			{/if}
+			<p class="post__date">
+				<span class="post__date--updated"> Updated </span>
+				{formatDate(post._updatedAt)}
+			</p>
+			{#if post.body}
+				<div class="post__content">
+					<PortableText
+						components={{
+							types: {
+								image: SanityImage
+							},
+							listItem: NormalTextSanity
+						}}
+						value={post.body}
+					/>
+				</div>
+			{/if}
+		</div>
+	</section>
+{:else}
+	<section class="post">
+		<div class="post__container">
+			<p class="post__excerpt">Loading post...</p>
+		</div>
+	</section>
+{/if}
 
 <style>
 	.post {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '@/lib/store';
+	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '$lib/store';
 	import Button from '@/components/Button.svelte';
 	import Input from '@/components/Input.svelte';
 	import Checkbox from '@/components/Checkbox.svelte';
