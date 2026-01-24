@@ -156,7 +156,7 @@
 				"https://github.com/raghav-rama",
 				"https://www.linkedin.com/in/ritviksingh258",
 				"https://twitter.com/Raghav__Rama",
-				"https://t.me/hackerrboy",
+				"https://t.me/TheRitvikS",
 				"https://www.youtube.com/@hackerboy5328"
 			]
 		}
