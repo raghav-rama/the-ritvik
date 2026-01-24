@@ -14,7 +14,7 @@
 			alt="Cover image for {post.title}"
 		/>
 	{:else}
-		<div class="card__cover--none" />
+		<div class="card__cover--none"></div>
 	{/if}
 
 	<div class="card__container">

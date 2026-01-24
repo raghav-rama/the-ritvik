@@ -1,9 +1,10 @@
 import { postsQuery as query, type Post } from '$lib/sanity/queries';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async (event) => {
-	const { loadQuery } = event.locals;
-	const initial = await loadQuery<Post[]>(query);
+export const load: PageServerLoad = async ({ locals: { sanity } }) => {
+	const { client, previewEnabled } = sanity;
+	const options = { stega: previewEnabled ? true : false };
+	const initial = await client.fetch<Post[]>(query, {}, options);
 
 	// We pass the data in a format that is easy for `useQuery` to consume in the
 	// corresponding `+page.svelte` file, but you can return the data in any

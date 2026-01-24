@@ -1,19 +1,16 @@
 <script lang="ts">
 	import { PortableText } from '@portabletext/svelte';
-	import { useQuery } from '@sanity/svelte-loader';
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
-	import type { PageData } from './$types';
+	import type { PageProps } from './$types';
 	import SanityImage from '@/components/SanityImage.svelte';
 	import NormalTextSanity from '@/components/NormalTextSanity.svelte';
 
-	export let data: PageData;
-	const q = useQuery(data);
-
-	$: ({ data: post } = $q);
-
-	$: articleUrl = `https://www.theritvik.in/post/${post.slug.current}`;
-	$: formattedExcerpt = post.excerpt?.substring(0, 160) || '';
+	const props: PageProps = $props();
+	const { data } = props;
+	const post = $derived(data.options.initial);
+	const formattedExcerpt = $derived(post.excerpt?.substring(0, 160) || '');
+	const articleUrl = $derived(`https://www.theritvik.in/post/${post.slug.current}`);
 </script>
 
 <svelte:head>
@@ -97,7 +94,7 @@
 			alt="Cover image for {post.title}"
 		/>
 	{:else}
-		<div class="post__cover--none" />
+		<div class="post__cover--none"></div>
 	{/if}
 	<div class="post__container">
 		<h1 class="post__title">{post.title}</h1>

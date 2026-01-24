@@ -1,6 +1,6 @@
 <div class="welcome__container">
 	<div class="logos">
-		<div class="logos__blur" />
+		<div class="logos__blur"></div>
 		<img class="logos__entry" src="/svelte.svg" alt="Svelte Logo" />
 		<span class="logos__plus">+</span>
 		<img class="logos__entry" src="/sanity.svg" alt="Sanity Logo" />

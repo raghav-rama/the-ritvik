@@ -104,7 +104,7 @@
 <canvas
 	bind:this={canvas}
 	style="position: fixed; top: 0; left: 0; z-index: -1; background: transparent;"
-/>
+></canvas>
 
 <section>
 	<h1>Can't resist the urge to contact me? Haha, I'm flattered!</h1>
