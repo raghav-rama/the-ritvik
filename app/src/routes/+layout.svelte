@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-	import { PreviewMode, VisualEditing, QueryLoader } from '@sanity/sveltekit';
+	import { PreviewMode, VisualEditing, LiveLoader } from '@sanity/sveltekit';
 	import type { LayoutProps } from './$types';
 	import { navigating } from '$app/stores';
 	import { isLoginModalOpen, isSignupModalOpen, isForgotPasswordModalOpen } from '$lib/store';
@@ -13,7 +13,7 @@
 	injectSpeedInsights();
 
 	const { children, data }: LayoutProps = $props();
-	const { previewEnabled } = $derived(data);
+	const { browserToken, previewEnabled, previewPerspective } = $derived(data);
 </script>
 
 <div class="container">
@@ -23,13 +23,13 @@
 	<main>
 		<PreviewMode enabled={previewEnabled}>
 			<VisualEditing enabled={previewEnabled}>
-				<QueryLoader enabled={previewEnabled} {client}>
+				<LiveLoader {client} {previewEnabled} {previewPerspective} {browserToken}>
 					{#if $navigating}
 						<Loader />
 					{:else}
 						{@render children()}
 					{/if}
-				</QueryLoader>
+				</LiveLoader>
 			</VisualEditing>
 		</PreviewMode>
 	</main>

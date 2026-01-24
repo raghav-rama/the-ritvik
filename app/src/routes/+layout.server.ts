@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = ({ locals: { sanity } }) => {
-	const { previewEnabled } = sanity;
-	return { previewEnabled };
+	const { browserToken, previewEnabled, previewPerspective } = sanity;
+	return { browserToken, previewEnabled, previewPerspective };
 };

@@ -1,14 +1,17 @@
-import { handlePreviewMode, handleQueryLoader, setServerClient } from '@sanity/sveltekit';
+import { handlePreviewMode, handleLiveLoader } from '@sanity/sveltekit';
 import { redirect } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { serverClient } from '$lib/server/sanity/client';
-
-setServerClient(serverClient);
+import { token } from '$lib/server/sanity/api';
 
 export const handle = sequence(
 	handlePreviewMode({
 		client: serverClient,
 		preview: { redirect }
 	}),
-	handleQueryLoader()
+	handleLiveLoader({
+		client: serverClient,
+		browserToken: token,
+		serverToken: token
+	})
 );

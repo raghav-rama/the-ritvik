@@ -1,16 +1,14 @@
 <script lang="ts">
 	import { PortableText } from '@portabletext/svelte';
-	import { useQuery } from '@sanity/sveltekit';
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
 	import type { PageProps } from './$types';
 	import SanityImage from '@/components/SanityImage.svelte';
 	import NormalTextSanity from '@/components/NormalTextSanity.svelte';
+	import type { Post } from '@/lib/sanity/queries';
 
-	const props: PageProps = $props();
-	const { data } = props;
-	const query = useQuery(data);
-	const post = $derived($query.data ?? null);
+	const { data }: PageProps = $props();
+	const post: Post = $derived(data.options.initial.data ?? null);
 	const formattedExcerpt = $derived(post?.excerpt?.substring(0, 160) ?? '');
 	const articleUrl = $derived(
 		post ? `https://www.theritvik.in/post/${post.slug.current}` : 'https://www.theritvik.in'
@@ -91,7 +89,9 @@
 		<meta name="theme-color" content="#FF0000" />
 
 		{#if jsonLd}
-			<script type="application/ld+json">{jsonLd}</script>
+			<script type="application/ld+json">
+				{jsonLd}
+			</script>
 		{/if}
 	{/if}
 </svelte:head>

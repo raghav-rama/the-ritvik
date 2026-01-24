@@ -23,6 +23,7 @@ export default defineConfig({
           disable: '/preview/disable',
         },
       },
+      allowOrigins: ['https://theritvik.in', 'http://localhost:*'],
     }),
     visionTool(),
   ],
