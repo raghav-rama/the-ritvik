@@ -172,17 +172,6 @@
 		font-size: var(--font-size-2);
 	}
 
-	/* .post .post__content blockquote {
-		border-left: 5px solid var(--black);
-		padding-left: var(--space-3);
-		margin-left: var(--space-4);
-	}
-
-	.post .post__content a {
-		color: var(--blue-600);
-		text-decoration: none;
-	} */
-
 	.post .post__title {
 		font-family: var(--font-family-sans);
 		font-size: var(--font-size-7);

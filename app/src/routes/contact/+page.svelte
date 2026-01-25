@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from '../$types';
+	import type { PageData } from './$types';
 	import ContactCard from '@/components/ContactCard.svelte';
 	import { onMount } from 'svelte';
 
