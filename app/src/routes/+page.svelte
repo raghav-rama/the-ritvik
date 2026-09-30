@@ -9,15 +9,21 @@
 	const metadata = $derived(data.metadata);
 </script>
 
-<section>
-	{#if posts.length}
-		{#each posts as post}
-			<Card {post} />
-		{/each}
-	{:else}
-		<Welcome />
-	{/if}
-</section>
+<main class="landing">
+	<header class="landing__header">
+		<h1>The Ritvik Blog</h1>
+		<p>Notes on software, technology, and life.</p>
+	</header>
+	<section aria-label="Recent posts">
+		{#if posts.length}
+			{#each posts as post, index (post.slug.current)}
+				<Card {post} loading={index === 0 ? 'eager' : 'lazy'} />
+			{/each}
+		{:else}
+			<Welcome />
+		{/if}
+	</section>
+</main>
 
 <svelte:head>
 	<title>{metadata.title}</title>
@@ -71,3 +77,34 @@
 	</script>
 	`}
 </svelte:head>
+
+<style>
+	.landing {
+		box-sizing: border-box;
+		width: 100%;
+		max-width: 1040px;
+		margin: 0 auto;
+		padding: clamp(24px, 5vw, 64px) clamp(20px, 4vw, 40px);
+	}
+
+	.landing__header {
+		padding-bottom: var(--space-5);
+		border-bottom: 1px solid var(--gray-200);
+	}
+
+	h1 {
+		margin: 0 0 var(--space-3);
+		font-size: clamp(1.75rem, 4vw, 2.25rem);
+		font-weight: 800;
+		line-height: 1.2;
+		letter-spacing: -0.025em;
+	}
+
+	.landing__header p {
+		margin: 0;
+		color: var(--gray-600);
+		font-family: var(--font-family-serif), serif;
+		font-size: var(--font-size-3);
+		line-height: 1.6;
+	}
+</style>

@@ -3,132 +3,122 @@
 	import { urlFor } from '$lib/sanity/image';
 	import type { Post } from '$lib/sanity/queries';
 
-	export let post: Post;
+	let { post, loading = 'lazy' }: { post: Post; loading?: 'eager' | 'lazy' } = $props();
+	const titleId = $props.id();
 </script>
 
-<a class="card" href={`/post/${post.slug.current}`}>
+<a class="card" href={`/post/${post.slug.current}`} aria-labelledby={titleId}>
 	{#if post.mainImage}
 		<img
 			class="card__cover"
-			src={urlFor(post.mainImage).width(500).height(300).url()}
+			src={urlFor(post.mainImage).width(640).height(400).fit('crop').auto('format').url()}
 			alt="Cover image for {post.title}"
+			width="640"
+			height="400"
+			{loading}
 		/>
 	{:else}
-		<div class="card__cover--none"></div>
+		<div class="card__cover card__cover--none" aria-hidden="true">The Ritvik Blog</div>
 	{/if}
 
 	<div class="card__container">
-		<h3 class="card__title">
+		<h2 id={titleId} class="card__title">
 			{post.title}
-		</h3>
+		</h2>
 		{#if post.excerpt}
 			<p class="card__excerpt">
-				{post.excerpt.length > 75 ? post.excerpt.slice(0, 75) + '...' : post.excerpt}
+				{post.excerpt}
 			</p>
 		{/if}
-		<p class="card__date">
+		<time class="card__date" datetime={post._createdAt}>
 			{formatDate(post._createdAt)}
-		</p>
+		</time>
 	</div>
 </a>
 
 <style>
 	.card {
-		display: flex;
-		flex-direction: column;
-		padding: var(--space-2);
-		padding: 9px;
-		position: relative;
-		border-bottom: 1px solid #ced2d9;
+		display: grid;
+		gap: var(--space-4);
+		padding: var(--space-5) 0;
+		border-bottom: 1px solid var(--gray-200);
 		color: var(--black);
 		text-decoration: none;
 	}
 
-	.card .card__container {
-		margin: 0 var(--space-1) 0;
+	.card__container {
+		min-width: 0;
 	}
 
-	.card .card__cover {
+	.card__cover {
+		display: block;
 		width: 100%;
-		height: 231px;
-		-o-object-fit: cover;
+		height: auto;
+		aspect-ratio: 8 / 5;
 		object-fit: cover;
+		border-radius: var(--radius-md);
 	}
 
-	.card .card__cover--none {
-		width: 100%;
-		height: 231px;
-		background: var(--black);
+	.card__cover--none {
+		display: grid;
+		place-items: center;
+		background: var(--gray-100);
+		color: var(--gray-600);
+		font-family: var(--font-family-serif), serif;
 	}
 
-	.card .card__title {
-		font-family: var(--font-family-sans);
+	.card__title {
+		font-family: var(--font-family-sans), sans-serif;
 		font-weight: 800;
-		font-size: var(--font-size-7);
-		line-height: var(--line-height-6);
+		font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+		line-height: 1.2;
 		letter-spacing: -0.025em;
-		margin: var(--space-3) 0;
+		overflow-wrap: anywhere;
+		margin: 0 0 var(--space-3);
 	}
 
-	.card .card__excerpt {
-		font-family: var(--font-family-serif);
+	.card__excerpt {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		overflow-wrap: anywhere;
+		font-family: var(--font-family-serif), serif;
 		font-weight: 400;
-		font-size: var(--font-size-4);
-		line-height: var(--line-height-3);
-		margin-top: 0;
+		font-size: var(--font-size-3);
+		line-height: 1.6;
+		margin: 0 0 var(--space-4);
 	}
 
-	.card .card__date {
-		font-weight: 600;
-		font-family: var(--font-family-sans);
+	.card__date {
+		display: block;
+		color: var(--gray-600);
+		font-family: var(--font-family-sans), sans-serif;
 		font-size: var(--font-size-1);
-		margin-top: calc(var(----space-4) + 7);
+		line-height: 1.5;
 	}
 
-	.card:hover .card__title {
-		opacity: 0.8;
-		transition: 0.2s;
+	.card:hover .card__title,
+	.card:focus-visible .card__title {
+		text-decoration: underline;
+		text-underline-offset: 4px;
 	}
 
-	.card:first-child {
-		border-top-left-radius: 3px;
-		border-top-right-radius: 3px;
+	.card:focus-visible {
+		outline: 2px solid var(--blue-600);
+		outline-offset: 6px;
+		border-radius: var(--radius-sm);
 	}
 
 	.card:last-child {
-		border-bottom-left-radius: 3px;
-		border-bottom-right-radius: 3px;
+		border-bottom: none;
 	}
 
-	@media (min-width: 575px) {
+	@media (min-width: 700px) {
 		.card {
-			border: 1px solid #ced2d9;
-			border-bottom: none;
-		}
-
-		.card .card__title {
-			margin-top: var(--space-4);
-		}
-
-		.card:last-child {
-			border-bottom: 1px solid #ced2d9;
-		}
-	}
-
-	@media (min-width: 800px) {
-		.card {
-			flex-direction: row;
-		}
-
-		.card .card__container {
-			margin: 0 var(--space-4) 0;
-		}
-
-		.card .card__cover,
-		.card .card__cover--none {
-			min-width: 366.5px;
-			max-width: 366.5px;
-			max-height: 231px;
+			grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
+			align-items: center;
+			gap: var(--space-5);
 		}
 	}
 </style>
