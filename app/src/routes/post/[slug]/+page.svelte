@@ -162,7 +162,6 @@
 		font-weight: 400;
 		font-size: var(--font-size-4);
 		line-height: var(--line-height-5);
-		letter-spacing: -0.02em;
 		margin-top: var(--space-6);
 	}
 

@@ -1,16 +1,11 @@
 <script lang="ts">
-	import type { PortableTextListItemType } from '@portabletext/types';
-	import type { ListItemComponentProps as ListItemComponent } from '@portabletext/svelte';
+	import type { Snippet } from 'svelte';
 
-	export let portableText:
-		| Record<PortableTextListItemType, ListItemComponent | undefined>
-		| ListItemComponent;
-
-	portableText.value;
+	let { children }: { children?: Snippet } = $props();
 </script>
 
 <li>
-	<slot />
+	{@render children?.()}
 </li>
 
 <style>
