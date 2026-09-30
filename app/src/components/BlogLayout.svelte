@@ -33,7 +33,7 @@
 					stroke-width="1.2"
 				/></svg
 			>
-			by <a href="/chat">Ritvik</a>
+			by <a href="/contact">Ritvik</a>
 			<a
 				title="raghav-rama-github"
 				class="footer__text--link"
