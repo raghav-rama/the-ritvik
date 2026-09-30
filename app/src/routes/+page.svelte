@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Card from '@/components/Card.svelte';
+	import BlogLayout from '@/components/BlogLayout.svelte';
 	import Welcome from '@/components/Welcome.svelte';
 	import type { PageProps } from './$types';
 	import type { Post } from '@/lib/sanity/queries';
@@ -9,21 +10,20 @@
 	const metadata = $derived(data.metadata);
 </script>
 
-<main class="landing">
-	<header class="landing__header">
-		<h1>The Ritvik Blog</h1>
-		<p>Notes on software, technology, and life.</p>
-	</header>
-	<section aria-label="Recent posts">
-		{#if posts.length}
-			{#each posts as post, index (post.slug.current)}
-				<Card {post} loading={index === 0 ? 'eager' : 'lazy'} />
-			{/each}
-		{:else}
-			<Welcome />
-		{/if}
-	</section>
-</main>
+<BlogLayout wide>
+	<div class="landing">
+		<h1 class="landing__title">The Ritvik Blog</h1>
+		<section aria-label="Recent posts">
+			{#if posts.length}
+				{#each posts as post, index (post.slug.current)}
+					<Card {post} loading={index === 0 ? 'eager' : 'lazy'} />
+				{/each}
+			{:else}
+				<Welcome />
+			{/if}
+		</section>
+	</div>
+</BlogLayout>
 
 <svelte:head>
 	<title>{metadata.title}</title>
@@ -80,31 +80,18 @@
 
 <style>
 	.landing {
-		box-sizing: border-box;
-		width: 100%;
-		max-width: 1040px;
-		margin: 0 auto;
-		padding: clamp(24px, 5vw, 64px) clamp(20px, 4vw, 40px);
+		padding: var(--space-4) 0;
 	}
 
-	.landing__header {
-		padding-bottom: var(--space-5);
-		border-bottom: 1px solid var(--gray-200);
-	}
-
-	h1 {
-		margin: 0 0 var(--space-3);
-		font-size: clamp(1.75rem, 4vw, 2.25rem);
-		font-weight: 800;
-		line-height: 1.2;
-		letter-spacing: -0.025em;
-	}
-
-	.landing__header p {
-		margin: 0;
-		color: var(--gray-600);
-		font-family: var(--font-family-serif), serif;
-		font-size: var(--font-size-3);
-		line-height: 1.6;
+	.landing__title {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>
